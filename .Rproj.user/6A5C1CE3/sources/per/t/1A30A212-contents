@@ -8,6 +8,77 @@
 
 # -----------Loops------------------------------
 
+
 # The two types of loops you want to know are for and while loops
+
+# For-loops run a specified amount of i iterations (or any other index you want)
+for(i in 1:10)  {
+  print(i)
+}
+
+for(i in 1:10)  {
+  print(i^2)
+}
+
+
+# While loops run as long as a specific condition is not met and stop once this condition is met
+i = 2
+
+while(i < 10) {
+  print(sqrt(i))
+  i = i+1
+}
+
+
+# A more complicated example
+
+categories <- data.frame(a = c("apple", "pear", "apple", "pear", "machine"),
+                         b = c("fruit", "fruit", "fruit", "fruit", "fruit"),
+                         stringsAsFactors = FALSE)
+
+# Check whether the fruit category wrongly includes something other than apple or pear
+for(i in 1:nrow(categories))  {
+  
+  if(categories[i, "a"] != "apple" & categories[i, "a"] != "pear") {
+    categories[i, "b"] = "not a fruit"
+  }
+  
+}
+
+print(categories)
+
+
+# -----------Functions--------------------------
+
+
+## Functions offer templates to have shortcuts for common things you want to do
+
+# This is a basic function calculating the pooled standard deviation
+
+pooledSD <- function(n1, n2, sd1, sd2)  {
+  
+  pooledSD = sqrt(
+    ((n1 - 1) * sd1^2 + (n2 - 1) * sd2^2) / 
+      (n1 + n2)
+  )
+  
+  return(pooledSD)
+  
+}
+
+pooledSD(n1 = 20, n2 = 40, sd1 = 5, sd2 = 10)
+
+
+
+# -----------Practice---------------------------
+
+
+## Build a function that can bootstrap a statistic of your choice from the bfi data
+
+library("psych")
+data(bfi)
+
+
+
 
 

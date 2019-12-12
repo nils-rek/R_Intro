@@ -5,13 +5,12 @@
 
 
 
-
 # -----------Basics------------------------------
 
 
 ## How do I read in Data? --> Different ways but often you start with a .csv file
 
-dat <- read.csv(
+dat = read.csv(
   file = "./Data/BFI_Data.csv", # file argument specifies file holding the data (and location) 
   header = TRUE, # header argument specifies whether there are variable names in top line
   sep = ";"
@@ -19,15 +18,17 @@ dat <- read.csv(
 
 
 # There are different ways of loading in the data
+save(dat, "./Data/BFI_Data.RData")
 load("./Data/BFI_Data.RData") # Load is helpful and quick if you use RData files
 rm(bfi) # let's remove this again
 
 
 # This dataset is actually freely available in the psych package
+#install.packages("psych")
 library("psych")
 data(bfi) # it can be loaded like this (no need to remember this approach for your own data)
 ?bfi # This is how you get some information on the data
-rm(bfi) # let's remove this again
+
 
 
 ## How does the data look like?
@@ -59,6 +60,7 @@ str(dat)
 1:15
 15:1
 5:25
+seq(from = 1, to = 2, by= 0.05)
 
 
 ## What does "<-" or "=" do?
@@ -81,6 +83,14 @@ dat[1, 2:3]
 dat[2:3, 1:5]
 
 
+# Get length 
+length(1:10)
+length(dat)
+length(dat[,2])
+nrow(dat)
+ncol(dat)
+
+
 ## What does "$" do?
 
 dat$A1
@@ -89,6 +99,7 @@ dat$gender[5:10]
 dat[5:10,]$gender
 dat[5:10, 26]
 dat[5:10, "gender"]
+dat[5:10, c("gender", "education")]
 
 
 ## What does the c Function do?
@@ -109,6 +120,14 @@ namesandnumbers <- data.frame(Variable1 = c(1, 5, 2),
                               Variable2 = c("Bernd", "David", "Simon"))
 namesandnumbers
 
+list(namesandnumbers,
+     test = 1:10)
+
+as.numeric("1")
+
+
+dat$O5 = as.numeric(dat$O5)
+
 
 ##What does the round function do?
 
@@ -121,6 +140,7 @@ round(c(2.3, 2.55, 2.777), 2)
 ## What does the rnorm function do?
 
 rnorm(20, mean = 100, sd = 15)
+rnorm(20, 100, 15)
 
 fakedat <- data.frame(fakeIQ = rnorm(100, mean = 100, sd = 15)) 
 head(fakedat)
@@ -132,6 +152,7 @@ head(fakedat)
 ## What does the table function do?
 
 table(fakedat$fakeBMI)
+prop.table(table(fakedat$fakeBMI)) * 100
 table(fakedat$fakeIQ) # oops....
 table(round(fakedat$fakeIQ))
 
@@ -139,6 +160,13 @@ table(round(fakedat$fakeIQ))
 ## What does the summary function do?
 
 summary(fakedat$fakeIQ)
+mean(fakedat$fakeIQ)
+mean(c(1, 3, 5, NA))
+mean(c(1, 3, 5, NA), na.rm = TRUE)
+median(fakedat$fakeIQ)
+min(fakedat$fakeIQ)
+max(fakedat$fakeIQ)
+sd(fakedat$fakeIQ)
 summary(fakedat$fakeBMI)
 summary(dat$A1)
 
@@ -155,6 +183,7 @@ hist(dat$age)
 
 plot(x = fakedat$fakeBMI, y = fakedat$fakeIQ)
 plot(fakedat$fakeBMI, fakedat$fakeIQ)
+
 with(fakedat, plot(fakeBMI, fakeIQ))
 
 
@@ -173,12 +202,23 @@ hist(fakemodel$residuals)
 qqnorm(fakemodel$residuals)
 qqline(fakemodel$residuals)
 
+plot(fitted(fakemodel), residuals(fakemodel))
+
 
 ## How are more complicated regression models created?
 
 fakedat$fakepreIQ <- fakedat$fakeIQ + rnorm(100, mean = 0, sd = 10)
 
 fakemodel <- lm(fakeIQ ~ fakeBMI + fakepreIQ, data = fakedat)
+summary(fakemodel)
+
+fakemodel <- lm(fakeIQ ~ fakeBMI : fakepreIQ, data = fakedat)
+summary(fakemodel)
+
+fakemodel <- lm(fakeIQ ~ fakeBMI + fakepreIQ + fakeBMI : fakepreIQ, data = fakedat)
+summary(fakemodel)
+
+fakemodel <- lm(fakeIQ ~ fakeBMI * fakepreIQ, data = fakedat)
 summary(fakemodel)
 
 with(fakedat, plot(fakepreIQ, fakeIQ))
