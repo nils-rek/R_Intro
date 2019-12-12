@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1576145614395.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "460353498",
+    "id" : "1269A18E",
+    "lastKnownWriteTime" : 1576145411,
+    "last_content_update" : 1576145411,
+    "path" : "~/R_Intro/Scripts/02_rmarkdown.Rmd",
+    "project_path" : "Scripts/02_rmarkdown.Rmd",
+    "properties" : {
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

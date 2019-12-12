@@ -1,0 +1,28 @@
+
+
+
+## Create data
+dat <- data.frame(bdi = rnorm(14, mean = 10, sd = 3))
+dat$para <- dat$bdi +5 + rnorm(14, mean = 0, sd = 10)
+
+
+
+# Correlation
+with(dat, cor(bdi, para))
+
+
+boot <- c()
+
+for(i in 1:1000)  {
+    
+    boot_dat <- dat[sample(1:14, 25, replace = TRUE),]
+    
+    boot[i] <- with(boot_dat, cor(bdi, para))
+    
+    
+}
+
+
+
+hist(boot)
+quantile(boot, probs = c(0.025, 0.975))
