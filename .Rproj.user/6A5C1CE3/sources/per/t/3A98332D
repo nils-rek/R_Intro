@@ -8,12 +8,12 @@
     "hash" : "3324996052",
     "id" : "3A98332D",
     "lastKnownWriteTime" : 1576157064,
-    "last_content_update" : 1576157064005,
+    "last_content_update" : 1576157064,
     "path" : "~/R_Intro/Scripts/1_basics.R",
     "project_path" : "Scripts/1_basics.R",
     "properties" : {
-        "cursorPosition" : "236,19",
-        "scrollLine" : "221"
+        "cursorPosition" : "240,0",
+        "scrollLine" : "227"
     },
     "read_only" : false,
     "read_only_alternatives" : [
